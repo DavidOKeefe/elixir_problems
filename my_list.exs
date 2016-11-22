@@ -23,9 +23,19 @@ defmodule MyList do
   defp calculate_max([_head | tail], value) do
     calculate_max(tail, value)
   end
+
+  def caesar([], _), do: ''
+  def caesar([head | tail], offset) when head + offset > ?z do
+    [head + offset - 26 | caesar(tail,  offset)]
+  end
+
+  def caesar([head | tail], offset) do
+    [head + offset | caesar(tail,  offset)]
+  end
 end
 
 IO.puts MyList.mapsum [1,2,3], &(&1 * &1)
 IO.puts MyList.reduce([1,2,3,4,5], 0, &(&1 + &2))
 IO.puts MyList.reduce([1,2,3,4,5], 1, &(&1 * &2))
 IO.puts MyList.max([1,2,12,3,4,5])
+IO.puts MyList.caesar('ryvkve', 13)
